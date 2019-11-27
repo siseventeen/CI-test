@@ -12,6 +12,7 @@
     "spotify-web-api-node": "^4.0.0"
   },
   "scripts": {
+    "cypress:open": "cypress open",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -33,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^3.6.1",
     "typescript": "^3.6.4"
   }
 }
