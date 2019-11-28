@@ -25,6 +25,7 @@ const EventCheckboxesGroup =() =>{
 			setCheckboxState(checkboxState);
 		};
 		fetchEventNames();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleChange = eventName => event => {

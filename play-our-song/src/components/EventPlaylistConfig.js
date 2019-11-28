@@ -14,6 +14,7 @@ import EventCheckboxesGroup from "./EventCheckboxesGroup";
 var client_id = 'b1bcbd4ae171494db0dbd3a736535946'; // Your client id
 var client_secret = '27127362e5174286a15516cc33a96998'; // Your secret
 // var redirect_uri = 'http://www.google.com'; // Your redirect uri
+// eslint-disable-next-line no-unused-vars
 var user_id = 'p7x48c95ztmvh1ry6umg0h82f'
 var SpotifyWebApi = require('spotify-web-api-node');
 // credentials are optional

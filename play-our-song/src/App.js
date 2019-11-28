@@ -150,6 +150,7 @@ const App = () =>  {
       })
       .catch(console.log)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
