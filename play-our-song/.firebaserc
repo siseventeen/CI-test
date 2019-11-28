@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "play-our-song"
+    "default": "play-our-song",
+    "test-play-our-song": "ci-test-11a9a"
   }
 }

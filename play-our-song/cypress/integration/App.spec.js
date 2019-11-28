@@ -6,8 +6,8 @@ describe ('Test App', () => {
 
   it ('showes untiled playlist', () => {
     cy.visit ('/');
-    //cy.get('[data-cy=title]').should('contain', 'Untitiled Playlist');
-    cy.get('[data-cy=title]').contains('Untitled Playlist');
+    cy.get('[data-cy=title]').should('contain', 'Untitled Playlist');
+    //cy.get('[data-cy=title]').contains('Untitled Playlist');
   });
 
   it ('showes generate button', () => {

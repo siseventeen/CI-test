@@ -4,6 +4,21 @@ import TopBar from './components/TopBar';
 import EventPlaylistConfig from './components/EventPlaylistConfig';
 import { fade,makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import firebase from 'firebase/app';
+import 'firebase/database';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBbCXkK69d0bTOb4E5WBdgg9mbchMNzFak",
+  authDomain: "ci-test-11a9a.firebaseapp.com",
+  databaseURL: "https://ci-test-11a9a.firebaseio.com",
+  projectId: "ci-test-11a9a",
+  storageBucket: "ci-test-11a9a.appspot.com",
+  messagingSenderId: "281561229382",
+  appId: "1:281561229382:web:8d9f2af7cbd523ef750247",
+};
+
+firebase.initializeApp(firebaseConfig);
+
 
 //-----------------START OF SPOTIFY BACKEND SETUP--------------------
 
