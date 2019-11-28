@@ -118,7 +118,7 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
           <EventCheckboxesGroup/>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" color="primary"  onClick={() => handleGenerate()}>
+          <Button data-cy="generate-bn" variant="contained" color="primary"  onClick={() => handleGenerate()}>
             Generate
           </Button>
         </DialogActions>
