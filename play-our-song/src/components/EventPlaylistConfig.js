@@ -24,9 +24,10 @@ var spotifyApi = new SpotifyWebApi({
 });
 spotifyApi.setAccessToken('BQBNXuIYqvAnjRf88UtATB6hNBydlF6KxmYicXJq2xjpHTmIrXt_8H-MOOShTAKndjlLYyFmOYMnsGf2eDocKGooXszvdQr46v385AcwLdNcPZi80Yx4XGcRzDlezQwq-RJoWlm_0zQWHOUKjNQd8PuBW12NGesaIDFvwVOom9Vc7F9k2TkoVV4Z8sJWnbs');
 
-
-const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
+const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
 	const [eventToGenres, setEventToGenres] = useState({});
+	// eslint-disable-next-line no-unused-vars
+	const [playlistId, setPlaylistId] = useState(null);
 
 	useEffect(() => {
 		const fetchEventToGenresMapping = async () => {
@@ -48,7 +49,7 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
 	const handleGenerate = () => {
 		console.log('handleGenerate clicked');
 		console.log(ctx);
-		ctx ? ctx.open[1](false) : null;
+		ctx.open[1](false);
 		// TODO: @Timo get form information
 		const playlistTitle = ctx.playlistTitle[0];
 		const playlistEvents = ctx.playlistEvents[0];
@@ -57,11 +58,38 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
 			[]);
 		const genres = Array.from(new Set(allGenresWithDuplications));
 		console.log(genres);
-		const trackRecs = getRecommendations(genres);
+		getRecommendations(genres).then((trackRecs) => {
+			createNewPlaylist(playlistTitle, trackRecs).then((pId) => {
+				setTracks(trackRecs);
+				addTracks(pId, trackRecs).then(data => {
+					forceUpdate();
+				});
+			});
+		});
 
-		// TODO: @Timo render the recommended tracks
-		createNewPlaylist(playlistTitle);
 		// TODO: @Timo add tracks to the new playlist
+	};
+
+	const addTracks = async (pId, trackRecs) => {
+		console.log(`playlistid is ${pId}`);
+		console.log("track recs from genre seeds:\n", trackRecs);
+		const trackRecsStrings = trackRecs.map((trackRec) => `spotify:track:${trackRec.id}`);
+		const endpoint = `https://api.spotify.com/v1/playlists/${pId}/tracks`;
+		return await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				Authorization: "Bearer " + authToken,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				'uris': trackRecsStrings,
+			}),
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			return data;
+		});
 	};
 
 	const createNewPlaylist = async (playlistTitle) => {
@@ -69,7 +97,7 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
 		const endpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
 		console.log("authToken in createNewPlaylist:", authToken);
 		console.log("playlistTitle in createNewPlaylist:", playlistTitle);
-		await fetch(endpoint, {
+		return await fetch(endpoint, {
 			method: 'POST',
 			headers: {
 				Authorization: "Bearer " + authToken,
@@ -82,20 +110,22 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
 		.then(response => response.json())
 		.then(data => {
 			console.log(data);
-		})
+			setPlaylistId(data.id);
+			console.log(data.id);
+			return data.id;
+		});
 	};
 
 	const getRecommendations = async (genres) => {
 		const genresAsString = genres.join(",");
 		const endpoint = "https://api.spotify.com/v1/recommendations?seed_genres=" + genresAsString;
-		await fetch(endpoint, {
+		return await fetch(endpoint, {
 			method: 'GET',
 			headers: {
-				Authorization: "Bearer " + authToken
+				Authorization: "Bearer " + authToken,
 			}
 		}).then(response => response.json())
 		.then(data => {
-			console.log("track recs from genre seeds:\n",data.tracks);
 			return data.tracks;
 		});
 	};
