@@ -48,7 +48,7 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
 	const handleGenerate = () => {
 		console.log('handleGenerate clicked');
 		console.log(ctx);
-		ctx.open[1](false);;
+		ctx ? ctx.open[1](false) : null;
 		// TODO: @Timo get form information
 		const playlistTitle = ctx.playlistTitle[0];
 		const playlistEvents = ctx.playlistEvents[0];
@@ -102,7 +102,7 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
 
 	return (
     <div>
-      <Dialog open={ctx.open[0]} onClose={() => ctx.open[1](false)} aria-labelledby="form-dialog-title">
+      <Dialog open={ctx ? ctx.open[0] : false} onClose={() => ctx.open[1](false)} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Generate your playlist in one step</DialogTitle>
         <DialogContent>
           <DialogContentText>
