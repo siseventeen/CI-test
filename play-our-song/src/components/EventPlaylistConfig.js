@@ -114,6 +114,7 @@ const EventPlaylistConfig = ({tracks, userId, authToken, forceUpdate}) =>{
             label="Playlist Title"
         	onChange={handleChange()}
             fullWidth
+            data-cy="input"
           />
           <EventCheckboxesGroup/>
         </DialogContent>
