@@ -42,7 +42,7 @@ const TopBar = ({ token , profilePic, username}) => {
                   PlayOurSong
                 </Typography>
                 <div className={classes.grow} />
-                <Button data-cy="title" variant="contained" color="primary" onClick={() => ctx ? ctx.open[1](true) : null}>
+                <Button data-testid='title' data-cy="title" variant="contained" color="primary" onClick={() => ctx ? ctx.open[1](true) : null}>
                 {ctx? (ctx.open[0]?'Untitled Playlist':ctx.playlistTitle[0]):''}
                 </Button>
                 <div className={classes.grow} />

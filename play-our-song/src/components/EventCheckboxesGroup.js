@@ -54,7 +54,7 @@ const EventCheckboxesGroup =() =>{
 						eventNames.map(eventName => (
 							<FormControlLabel
 							 	control={
-									<Checkbox checked={checkboxState[eventName]}
+									<Checkbox data-testid={`checkBox_${eventName}`} checked={checkboxState[eventName]}
 										onChange={handleChange(eventName)}
 										value={eventName} />
 								}

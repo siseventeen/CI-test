@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import TextField from '@material-ui/core/TextField';
-//import Dialog from '@material-ui/core/Dialog';
+import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -136,7 +136,7 @@ const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
       <Dialog open={ctx ? ctx.open[0] : false} onClose={() => ctx.open[1](false)} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Generate your playlist in one step</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText data-testid='dialog-text'>
             To generate your playlist, please enter the title of your playlist and the type of your event.
           </DialogContentText>
           <TextField
@@ -145,12 +145,13 @@ const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
             label="Playlist Title"
         	onChange={handleChange()}
             fullWidth
+            data-testid='input'
             data-cy="input"
           />
           <EventCheckboxesGroup/>
         </DialogContent>
         <DialogActions>
-          <Button data-cy="generate-bn" variant="contained" color="primary"  onClick={() => handleGenerate()}>
+          <Button data-testid='generate-bn' data-cy="generate-bn" variant="contained" color="primary"  onClick={() => handleGenerate()}>
             Generate
           </Button>
         </DialogActions>
