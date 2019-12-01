@@ -134,7 +134,7 @@ const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
 	return (
     <div>
       <Dialog data-testid='dialog-container' open={ctx ? ctx.open[0] : false} onClose={() => ctx.open[1](false)} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Generate your playlist in one step</DialogTitle>
+        <DialogTitle data-testid="title" id="form-dialog-title">Generate your playlist in one step</DialogTitle>
         <DialogContent>
           <DialogContentText data-testid='dialog-text'>
             To generate your playlist, please enter the title of your playlist and the type of your event.

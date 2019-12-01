@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { reactContext } from './utils/store';
 import Playlist from './components/Playlist';
 import TopBar from './components/TopBar';
 import EventPlaylistConfig from './components/EventPlaylistConfig';
@@ -124,6 +125,16 @@ const App = () =>  {
   const [username, setUsername] = useState();
   const [userId, setUserId] = useState();
 
+  const [playlistTitle, setPlaylistTitle] = React.useState('Untitled Playlist');
+	const [playlistEvents, setPlaylistEvents] = React.useState([]);
+  const [open, setOpen] = React.useState(true);
+
+  const store = {
+		playlistTitle: [playlistTitle, setPlaylistTitle],
+		playlistEvents: [playlistEvents, setPlaylistEvents],
+		open: [open, setOpen],
+	}
+  
   useEffect(() => {
     // Set access token for spotify
     let _token = hash.access_token;
@@ -161,7 +172,9 @@ const App = () =>  {
   <Container maxWidth="md" >
     <Playlist tracks={ tracks } />
   </Container>
+  <reactContext.Provider value={ store }>
   <EventPlaylistConfig tracks={ tracks } userId={ userId } authToken={ tokens } forceUpdate={ forceUpdate }/>
+  </reactContext.Provider>
   </React.Fragment>
 
 );}
