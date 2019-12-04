@@ -26,6 +26,7 @@ var spotifyApi = new SpotifyWebApi({
 spotifyApi.setAccessToken('BQBNXuIYqvAnjRf88UtATB6hNBydlF6KxmYicXJq2xjpHTmIrXt_8H-MOOShTAKndjlLYyFmOYMnsGf2eDocKGooXszvdQr46v385AcwLdNcPZi80Yx4XGcRzDlezQwq-RJoWlm_0zQWHOUKjNQd8PuBW12NGesaIDFvwVOom9Vc7F9k2TkoVV4Z8sJWnbs');
 
 const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
+	// eslint-disable-next-line no-unused-vars
 	const [eventToGenres, setEventToGenres] = useState({});
 	// eslint-disable-next-line no-unused-vars
 	const [playlistId, setPlaylistId] = useState(null);
@@ -52,25 +53,27 @@ const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
 		console.log(ctx);
 		ctx.open[1](false);
 		// TODO: @Timo get form information
+		// eslint-disable-next-line no-unused-vars
 		const playlistTitle = ctx.playlistTitle[0];
+		// eslint-disable-next-line no-unused-vars
 		const playlistEvents = ctx.playlistEvents[0];
-		const allGenresWithDuplications = playlistEvents.reduce(
-			(acc, currEventName) => acc.concat(eventToGenres[currEventName]),
-			[]);
-		const genres = Array.from(new Set(allGenresWithDuplications));
-		console.log(genres);
-		getRecommendations(genres).then((trackRecs) => {
-			createNewPlaylist(playlistTitle, trackRecs).then((pId) => {
-				setTracks(trackRecs);
-				addTracks(pId, trackRecs).then(data => {
-					forceUpdate();
-				});
-			});
-		});
+		//const allGenresWithDuplications = playlistEvents.reduce(
+		//	(acc, currEventName) => acc.concat(eventToGenres[currEventName]),
+		//	[]);
+		//const genres = Array.from(new Set(allGenresWithDuplications));
+		//console.log(genres);
+		//getRecommendations(genres).then((trackRecs) => {
+		//	createNewPlaylist(playlistTitle, trackRecs).then((pId) => {
+		//		setTracks(trackRecs);
+		//		addTracks(pId, trackRecs).then(data => {
+		//			forceUpdate();
+		//		});
+		//	});
+		//});
 
 		// TODO: @Timo add tracks to the new playlist
 	};
-
+    // eslint-disable-next-line no-unused-vars
 	const addTracks = async (pId, trackRecs) => {
 		console.log(`playlistid is ${pId}`);
 		console.log("track recs from genre seeds:\n", trackRecs);
@@ -93,6 +96,7 @@ const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
 		});
 	};
 
+	// eslint-disable-next-line no-unused-vars
 	const createNewPlaylist = async (playlistTitle) => {
 		// spotifyApi.createPlaylist(userId, playlistTitle);
 		const endpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
@@ -117,6 +121,7 @@ const EventPlaylistConfig = ({setTracks, userId, authToken, forceUpdate}) =>{
 		});
 	};
 
+	// eslint-disable-next-line no-unused-vars
 	const getRecommendations = async (genres) => {
 		const genresAsString = genres.join(",");
 		const endpoint = "https://api.spotify.com/v1/recommendations?seed_genres=" + genresAsString;
