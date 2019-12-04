@@ -168,12 +168,12 @@ const App = () =>  {
 
   return(
   <React.Fragment>
+  <reactContext.Provider value={store}>
   <TopBar token={ tokens } username = {username} profilePic = {profilePic} className={classes.grow } />
   <Container maxWidth="md" >
     <Playlist tracks={ tracks } />
   </Container>
-  <reactContext.Provider value={ store }>
-  <EventPlaylistConfig tracks={ tracks } userId={ userId } authToken={ tokens } forceUpdate={ forceUpdate }/>
+  <EventPlaylistConfig setTracks={ setTracks } userId={ userId } authToken={ tokens } forceUpdate={ forceUpdate }/>
   </reactContext.Provider>
   </React.Fragment>
 

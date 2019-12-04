@@ -18,7 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:ci": "cypress run --config video=false",
+    "test:ci": "react-scripts test --watchAll=false && start-server-and-test start http://localhost:3000 cypress:ci"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,6 +41,7 @@
     "@testing-library/react": "^9.3.2",
     "cypress": "^3.6.1",
     "jest-dom": "^4.0.0",
+    "start-server-and-test": "^1.10.6",
     "typescript": "^3.6.4"
   }
 }
